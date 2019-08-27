@@ -1,0 +1,42 @@
+<resources>
+    <!-- Strings related to DabaseActivity-->
+    <string name="app_name" translatable="false">Ripetizioni</string>
+    <string name="intro_text" translatable="false">Seleziona la materia</string>
+    <string name="fisica" translatable="false">FISICA</string>
+    <string name="matematica" translatable="false">MATEMATICA</string>
+    <string name="chimica" translatable="false">CHIMICA</string>
+
+    <string name="fisica_description" translatable="false">Lezioni di fisica per studenti delle superiori con integrazioni in laboratorio.</string>
+    <string name="matematica_description" translatable="false">Lezioni di matematica con aiuto compiti.</string>
+    <string name="chimica_description" translatable="false">Lezioni di chimica ma è facile tanto la sanno tutti :D</string>
+
+    <string name="fisica_request_message" translatable="false">Hai prenotato Fisica!</string>
+    <string name="matematica_request_message" translatable="false">Hai prenotato Matematica!</string>
+    <string name="chimica_request_message" translatable="false">Hai prenotato Chimica!</string>
+
+    <string-array name="prof_database">
+        <item>Demo</item>
+        <item>Anselma</item>
+        <item>PAOLONE</item>
+    </string-array>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password" translatable="false">Password (optional)</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
+    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="error_invalid_email" translatable="false">This email address is invalid</string>
+    <string name="error_invalid_password" translatable="false">This password is too short</string>
+    <string name="error_incorrect_password" translatable="false">This password is incorrect</string>
+    <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main2" translatable="false">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
