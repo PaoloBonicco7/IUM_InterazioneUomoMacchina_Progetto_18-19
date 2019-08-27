@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -54,11 +55,25 @@ class Model {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //super.onSuccess(statusCode, headers, response);
                 Toast.makeText(ctx, "Login_success" + username, Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(ctx, classe);
+                Intent i1 = new Intent(ctx, classe);
+                Intent i2 = new Intent(ctx, AdministratorActivity.class);
 
-                i.putExtra("username", username);
+                //Controllo se è amministratore
+                Boolean isAdmin = false;
 
-                ctx.startActivity(i);
+                try {
+                    isAdmin = response.getBoolean("ISADMIN");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                if(!isAdmin) {
+                    i1.putExtra("username", username);
+                    ctx.startActivity(i1);
+                } else {
+                    i2.putExtra("username", username);
+                    ctx.startActivity(i2);
+                }
             }
 
             @Override

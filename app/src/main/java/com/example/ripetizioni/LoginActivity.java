@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView registrare = findViewById(R.id.registare_btn);
 
-        /*clickando sul pulsante accedi , si va a verificare al model, si è corretto allora si cambia activity altimenti ritorna un errore*/
+        //Listener accedi_btn
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        /* scambia activity , fra login e register*/
+        //Funzione di registrazione non richiesta, lascia loggare in automatico
         registrare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

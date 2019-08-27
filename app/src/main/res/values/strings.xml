@@ -5,6 +5,9 @@
     <string name="fisica" translatable="false">FISICA</string>
     <string name="matematica" translatable="false">MATEMATICA</string>
     <string name="chimica" translatable="false">CHIMICA</string>
+    <string name="administratorString" translatable="false">SEI APPENA LOGGATO COME AMMINISTRATORE, PER EFFETTUARE
+                DELLE OPERAZIONI COLLEGATI AL NOSTRO SITO WEB</string>
+
 
     <string name="fisica_description" translatable="false">Lezioni di fisica per studenti delle superiori con integrazioni in laboratorio.</string>
     <string name="matematica_description" translatable="false">Lezioni di matematica con aiuto compiti.</string>
@@ -39,4 +42,5 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="seleziona_il_giorno">Seleziona il giorno</string>
 </resources>
