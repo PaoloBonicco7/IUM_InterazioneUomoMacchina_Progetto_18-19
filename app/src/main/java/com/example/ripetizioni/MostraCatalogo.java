@@ -1,6 +1,8 @@
 package com.example.ripetizioni;
 
-public class MostraCatalogo {
+import java.io.Serializable;
+
+public class MostraCatalogo implements Serializable {
 
     private int idCatalogo; //chiave DB
     private int idDocente; //db

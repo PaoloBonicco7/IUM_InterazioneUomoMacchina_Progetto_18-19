@@ -12,7 +12,7 @@ public class UserActivity extends AppCompatActivity {
 
     String username;
     private RequestParams params;
-    private static Model model;
+    private static Model model = new Model();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
