@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(LoginActivity.this, "Attempt to Login of user " + u, Toast.LENGTH_SHORT).show();
 
-                model.checkLogin(LoginActivity.this, MainActivity.class, u, p, params);
+                model.checkLogin(LoginActivity.this, UserActivity.class, u, p, params);
             }
         });
 

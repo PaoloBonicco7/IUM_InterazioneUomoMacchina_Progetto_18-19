@@ -3,37 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:background="@color/LoginBackground"
+    android:backgroundTint="@color/LoginBackground"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:textColor="@color/colorPrimaryDark"
         android:layout_gravity="center"
-        android:textSize="25dp"
         android:layout_marginTop="20dp"
-        />
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="LOGIN"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:id="@+id/username"
-        android:hint="username"
-        android:textSize="22dp"
-        android:gravity="center"
-        />
-    <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/password"
-        android:hint="password"
-        android:textSize="22dp"
+        android:background="@android:color/background_light"
         android:gravity="center"
-        />
+        android:hint="username"
+        android:textSize="22dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/background_light"
+        android:gravity="center"
+        android:hint="password"
+        android:textSize="22dp" />
 
     <Button
         android:id="@+id/accedi_btn"
@@ -50,8 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textSize="22dp"
         android:hint="Registrare"
-        />
+        android:textSize="22dp" />
 
 </LinearLayout>

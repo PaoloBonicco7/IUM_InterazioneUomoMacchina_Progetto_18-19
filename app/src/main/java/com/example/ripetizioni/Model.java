@@ -11,6 +11,8 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 class Model {
@@ -80,6 +82,41 @@ class Model {
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 //super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(ctx, "username o password incorretta", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    void dayInfo(final Context ctx, final Class classe, RequestParams params) {
+        client.get(MYURL, params, new JsonHttpResponseHandler() {
+            String obj;
+            ArrayList<MostraCatalogo> cat = null;
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Intent i1 = new Intent(ctx, classe);
+
+                System.out.println("Sto eseguendo dayInfoOnSuccesso");
+
+                /*
+                try {
+                    obj = response.getString("CATALOGO_Android");
+                    Type listType = new TypeToken<ArrayList<MostraCatalogo>>() {}.getType();
+                    cat = new Gson().fromJson(obj, listType);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println(cat);
+
+                i1.putExtra("catalogo", cat);
+                */
+                ctx.startActivity(i1);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                //super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(ctx, "ERROR: Tentativo di connessione al server fallita", Toast.LENGTH_SHORT).show();
             }
         });
     }

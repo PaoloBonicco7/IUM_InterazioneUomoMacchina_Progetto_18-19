@@ -1,6 +1,6 @@
 <resources>
     <!-- Strings related to DabaseActivity-->
-    <string name="app_name" translatable="false">Ripetizioni</string>
+    <string name="app_name" translatable="false">EASY LEARN</string>
     <string name="intro_text" translatable="false">Seleziona la materia</string>
     <string name="fisica" translatable="false">FISICA</string>
     <string name="matematica" translatable="false">MATEMATICA</string>
