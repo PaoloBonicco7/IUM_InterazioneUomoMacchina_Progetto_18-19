@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -32,8 +31,7 @@ public class UserActivity extends AppCompatActivity {
                 params = new RequestParams();
                 params.put("azione", "Richiesta_slot");
                 params.put("day", "lunedì");
-
-                Toast.makeText(UserActivity.this, "Lun_btn HANDLER", Toast.LENGTH_SHORT).show();
+                params.put("username", username);
 
                 model.dayInfo(UserActivity.this, DayActivity.class, params);
             }

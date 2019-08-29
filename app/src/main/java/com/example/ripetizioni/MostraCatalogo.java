@@ -10,22 +10,30 @@ public class MostraCatalogo implements Serializable {
     private String giorno; //giorno in cui è prevista la ripetizione ("LUNEDI"-"MARTEDI"-"MERCOLEDI"-"GIOVEDI"-"VENERDI"-"SABATO"-"DOMENICA")
     private int oraInizio; //orario inizio "15-16-17-18-19"
     private int oraFine; //16-17-18-19-20
-    private boolean prenotabile; //false = occupata - true = prenotabile
+    private String stato; //false = occupata - true = stato
     private String nome; //nome docente
     private String cognome; //cognome docente
     private String titolo; //titolo corso
 
-    public MostraCatalogo(int idCatalogo, int idDocente, int idCorso, String giorno, int oraInizio, int oraFine, boolean prenotabile, String nome, String cognome, String titolo) {
+    public MostraCatalogo(int idCatalogo, int idDocente, int idCorso, String giorno, int oraInizio, int oraFine, String stato, String nome, String cognome, String titolo) {
         this.idCatalogo = idCatalogo;
         this.idDocente = idDocente;
         this.idCorso = idCorso;
         this.giorno = giorno;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
-        this.prenotabile = prenotabile;
+        this.stato = stato;
         this.nome = nome;
         this.cognome = cognome;
         this.titolo = titolo;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 
     public int getIdCatalogo() {
@@ -76,14 +84,6 @@ public class MostraCatalogo implements Serializable {
         this.oraFine = oraFine;
     }
 
-    public boolean isPrenotabile() {
-        return prenotabile;
-    }
-
-    public void setPrenotabile(boolean prenotabile) {
-        this.prenotabile = prenotabile;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -110,7 +110,8 @@ public class MostraCatalogo implements Serializable {
 
     @Override
     public String toString() {
-        return "MostraCatalogo{" + "idCatalogo=" + idCatalogo + ", idDocente=" + idDocente + ", idCorso=" + idCorso + ", giorno=" + giorno + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine + ", prenotabile=" + prenotabile + ", nome=" + nome + ", cognome=" + cognome + ", titolo=" + titolo + '}';
+        return "MostraCatalogo{" + "idCatalogo=" + idCatalogo + ", idDocente=" + idDocente + ", idCorso=" + idCorso + ", giorno=" + giorno + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine + ", prenotabile=" + stato + ", nome=" + nome + ", cognome=" + cognome + ", titolo=" + titolo + '}';
     }
 
 }
+
