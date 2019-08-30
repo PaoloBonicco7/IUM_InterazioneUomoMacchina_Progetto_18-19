@@ -76,6 +76,16 @@ public class SubjectActivity extends AppCompatActivity {
     public void showTimes(ArrayList<MostraCatalogo> cat, String s) {
         ArrayList<MostraCatalogo> catDoc = new ArrayList<>();
 
+        /*  STAMPA DI TESTING
+        if (cat != null) {
+            for (MostraCatalogo list: catDoc) {
+                catalogo = catalogo + "\n" + list;
+            }
+        }
+
+        System.out.println("SUBJECT ACTIVITY \n" + catalogo);
+        */
+
         for (MostraCatalogo list: cat) {
             if(list.getCognome().equals(s)){
                 catDoc.add(list);

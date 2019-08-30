@@ -40,7 +40,7 @@ public class DayActivity extends AppCompatActivity {
             }
         }
 
-        System.out.println(catalogo);
+        //System.out.println(catalogo);
 
         android.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -60,7 +60,7 @@ public class DayActivity extends AppCompatActivity {
                 catSubject.add(list);
             }
         }
-        i1.putExtra("catalogoAndroid", cat);
+        i1.putExtra("catalogoAndroid", catSubject);
         i1.putExtra("subject", sub);
         i1.putExtra("username", username);
 

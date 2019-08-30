@@ -119,4 +119,16 @@ class Model {
         });
     }
 
+    public void prenota(RequestParams params) {
+        client.get(MYURL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+        });
+    }
 }
