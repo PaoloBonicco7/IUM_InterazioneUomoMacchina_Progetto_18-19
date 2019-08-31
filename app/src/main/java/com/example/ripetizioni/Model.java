@@ -59,7 +59,6 @@ class Model {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //super.onSuccess(statusCode, headers, response);
                 Toast.makeText(ctx, "Login_success" + username, Toast.LENGTH_SHORT).show();
                 Intent i1 = new Intent(ctx, classe);
                 Intent i2 = new Intent(ctx, AdministratorActivity.class);
@@ -90,23 +89,26 @@ class Model {
         });
     }
 
-    void dayInfo(final Context ctx, final Class classe, RequestParams params) {
+    void dayInfo(final Context ctx, final Class classe, String u, RequestParams params) {
+        final String username = new String(u);
+        final String[] obj = new String[1];
+        final ArrayList<MostraCatalogo>[] cat = new ArrayList[]{new ArrayList<>()};
+
         client.get(MYURL, params, new JsonHttpResponseHandler() {
-            String obj;
-            ArrayList<MostraCatalogo> cat = new ArrayList<>();
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Intent i1 = new Intent(ctx, classe);
 
                 try {
-                    obj = response.getString("CATALOGO_Android");
+                    obj[0] = response.getString("CATALOGO_Android");
                     Type listType = new TypeToken<ArrayList<MostraCatalogo>>(){}.getType();
-                    cat = new Gson().fromJson(obj, listType);
+                    cat[0] = new Gson().fromJson(obj[0], listType);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                i1.putExtra("catalogo", cat);
+                i1.putExtra("catalogo", cat[0]);
+                i1.putExtra("username", username);
 
                 ctx.startActivity(i1);
             }
@@ -119,16 +121,37 @@ class Model {
         });
     }
 
-    public void prenota(RequestParams params) {
+    public void prenota(final Context ctx, final Class classe, final String username, RequestParams params) {
+        final Boolean[] check = new Boolean[1];
+        check[0] = false;
         client.get(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    check[0] = Boolean.valueOf(response.getString("result"));
+                    System.out.println("RESPONSE:\n" + check[0]);
+                    if(check[0]){
+                        System.out.println("PRENOTAZIONE EFFETTUATA CON SUCCESSO");
+                    } else {
+                        System.out.println("ERRORE DURANTE LA PRENOTAZIONE");
+                    }
 
+                    //START TimesActivity (again)
+                    Intent i1 = new Intent(ctx, classe);
+
+                    i1.putExtra("check", check[0]);
+                    i1.putExtra("username", username);
+                    ctx.startActivity(i1);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
+                System.out.println("OnFalliure ERRORE NELLA PRENOTAIZONE DI UNA RIPETIZIONE");
             }
         });
+
     }
 }

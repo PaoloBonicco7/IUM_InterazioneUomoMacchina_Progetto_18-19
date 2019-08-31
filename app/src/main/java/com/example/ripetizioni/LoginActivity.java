@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Toast.makeText(LoginActivity.this, "Attempt to Login of user " + u, Toast.LENGTH_SHORT).show();
 
-                model.checkLogin(LoginActivity.this, UserActivity.class, u, p, params);
+                model.checkLogin(LoginActivity.this, ChooseActivity.class, u, p, params);
             }
         });
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         registrare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, UserActivity.class);
+                Intent i = new Intent(LoginActivity.this, ChooseActivity.class);
                 startActivity(i);
             }
         });

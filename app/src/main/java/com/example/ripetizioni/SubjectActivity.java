@@ -35,6 +35,8 @@ public class SubjectActivity extends AppCompatActivity {
         username = (String) extras.get("username");
         subject = (String) extras.get("subject");
 
+        System.out.println("SUBJECT ACTIVITY USERNAME\n" + username);
+
         if (cat != null) {
             for (MostraCatalogo list: cat) {
                 catalogo = catalogo + "\n" + list;

@@ -1,6 +1,6 @@
 <resources>
     <!-- Strings related to DabaseActivity-->
-    <string name="app_name" translatable="false">EASY LEARN</string>
+    <string name="app_name" translatable="false">Easy Learn</string>
     <string name="intro_text" translatable="false">Seleziona la materia</string>
     <string name="fisica" translatable="false">FISICA</string>
     <string name="matematica" translatable="false">MATEMATICA</string>
@@ -51,4 +51,9 @@
     <string name="android_description">ANDROID</string>
     <string name="programmazione_description">PROGRAMMAZIONE</string>
     <string name="so_description">SISTEMI OPERAIVI</string>
+    <string name="conferma">CONFERMA</string>
+    <string name="visualizza_le_tue_ripetizioni_prenotate">Visualizza le tue ripetizioni prenotate</string>
+    <string name="prenota_una_ripetizione">Prenota una ripetizione</string>
+    <string name="torna_alla_home">Torna alla home</string>
+    <string name="stato_prenotazione">Stato prenotazione</string>
 </resources>

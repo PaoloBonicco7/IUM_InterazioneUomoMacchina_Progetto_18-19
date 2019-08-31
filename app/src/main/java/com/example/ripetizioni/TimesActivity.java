@@ -18,17 +18,18 @@ public class TimesActivity extends AppCompatActivity {
 
     ArrayList<String> orari = new ArrayList<>();
     ArrayList<MostraCatalogo> catDoc = new ArrayList<>();
-    String username, subject, doc, catalogo;
+    String username, subject, doc, catalogo, visualizzaPrenotaz;
     Bundle extras;
     TextView textView;
     Button conferma;
     Spinner spinner;
     private static Model model = new Model();
 
-    ArrayList<MostraCatalogo> prenotazione = new ArrayList<>();
+    MostraCatalogo prenotazione;
     String[] parts;
     int oraInizio;
     int oraFine;
+    int check = 0;
 
     private RequestParams params;
 
@@ -49,41 +50,46 @@ public class TimesActivity extends AppCompatActivity {
         }
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+            public void onItemSelected (AdapterView < ? > parent, View view,int position, long id){
+                if(++check >1) {
+                    textView = findViewById(R.id.textView5);
+                    String catalogo = "CATALOGO PROF: \n";
 
-                textView = findViewById(R.id.textView5);
-                String catalogo = "CATALOGO PROF: \n";
+                    if (catDoc.isEmpty()) {
+                        System.out.println("CAT DOC VUOTO AAAAA");
+                    }
 
-                if(catDoc.isEmpty()){
-                    System.out.println("CAT DOC VUOTO AAAAA");
-                }
+                    for (MostraCatalogo list : catDoc) {
+                        catalogo = catalogo + "\n" + list.toString();
+                    }
 
-                for (MostraCatalogo list: catDoc) {
-                    catalogo = catalogo + "\n" + list.toString();
-                }
+                    textView.setText(catalogo);
 
-                textView.setText(catalogo);
+                    //Extract value from spinner
+                    String s = (String) parent.getItemAtPosition(position);
+                    parts = s.split("-");
 
-                //Extract value from spinner
-                String s = (String) parent.getItemAtPosition(position);
-                parts = s.split("-");
+                    oraInizio = Integer.parseInt(parts[0]);
+                    oraFine = Integer.parseInt(parts[1]);
 
-                oraInizio = Integer.parseInt(parts[0]);
-                oraFine = Integer.parseInt(parts[1]);
+                    textView.setText("Hai selezionato il blocco orario: " + s);
 
-                textView.setText("Hai selezionato il blocco orario: " + s);
-
-                for (MostraCatalogo list : catDoc) {
-                    System.out.println(list.toString());
-                    if(oraInizio == list.getOraInizio()){
-                        //Controllo inutile
-                        if(oraFine == list.getOraFine()) {
-                            prenotazione.add(list);
+                    for (MostraCatalogo list : catDoc) {
+                        System.out.println(list.toString());
+                        if (oraInizio == list.getOraInizio()) {
+                            prenotazione = list;
                         }
                     }
-                }
 
-                textView.setText(prenotazione.toString());
+                    if(prenotazione != null) {
+                        visualizzaPrenotaz = "Lezione di " + subject + " tenuta dal Prof. " + prenotazione.getCognome() +
+                                " " + prenotazione.getNome() + " dalle ore " + prenotazione.getOraInizio() + " alle " + prenotazione.getOraFine();
+                    } else {
+                        visualizzaPrenotaz = "L'orario selezionato non è più disponibile";
+                    }
+                    textView.setText(visualizzaPrenotaz);
+                    conferma.setVisibility(View.VISIBLE);
+                }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -99,13 +105,20 @@ public class TimesActivity extends AppCompatActivity {
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setText("CAZZONE\n" + prenotazione.toString());
-
                 params = new RequestParams();
+                extras = getIntent().getExtras();
+
+                if(extras != null) {
+                    username = (String) extras.get("username");
+                }
+
+                System.out.println("USERNAME\n" + username);
 
                 params.put("username", username);
-                params.put("ripetizione", prenotazione);
-                //model.prenota(params);
+                params.put("catalogo", prenotazione.getIdCatalogo());
+                params.put("azione", "Prenota");
+
+                model.prenota(TimesActivity.this, CheckActivity.class, username, params);
             }
         });
     }
