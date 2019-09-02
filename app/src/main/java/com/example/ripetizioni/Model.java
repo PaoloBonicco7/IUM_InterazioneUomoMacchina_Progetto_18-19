@@ -28,28 +28,6 @@ class Model {
         client = new AsyncHttpClient();
     }
 
-    void register(final Context ctx, RequestParams params) {
-
-        client.get(MYURL, params, new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //super.onSuccess(statusCode, headers, response);
-                Toast.makeText(ctx, "Registrazione_success" + response, Toast.LENGTH_SHORT).show();
-                //System.out.println("hola");
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                //super.onFailure(statusCode, headers, responseString, throwable);
-                Toast.makeText(ctx, "Gia Esistente", Toast.LENGTH_SHORT).show();
-                // System.out.println("puto");
-
-            }
-        });
-    }
-
-
     void checkLogin(final Context ctx, final Class classe, String u, String p, RequestParams params) {
 
         final String username = new String(u);
@@ -121,9 +99,10 @@ class Model {
         });
     }
 
-    public void prenota(final Context ctx, final Class classe, final String username, RequestParams params) {
+    public void prenota(final Context ctx, final Class classe, String username, RequestParams params) {
         final Boolean[] check = new Boolean[1];
         check[0] = false;
+        final String u = username;
         client.get(MYURL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -140,7 +119,7 @@ class Model {
                     Intent i1 = new Intent(ctx, classe);
 
                     i1.putExtra("check", check[0]);
-                    i1.putExtra("username", username);
+                    i1.putExtra("username", u);
                     ctx.startActivity(i1);
 
                 } catch (JSONException e) {
@@ -153,5 +132,36 @@ class Model {
             }
         });
 
+    }
+
+    public void getPrenotazioni(final Context ctx, final Class classe, String u, RequestParams params) {
+        final String username = new String(u);
+        final String[] obj = new String[1];
+        final ArrayList<MostraEffettuate>[] cat = new ArrayList[]{new ArrayList<>()};
+
+        client.get(MYURL, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Intent i1 = new Intent(ctx, classe);
+
+                try {
+                    obj[0] = response.getString("prenotazioni");
+                    Type listType = new TypeToken<ArrayList<MostraEffettuate>>(){}.getType();
+                    cat[0] = new Gson().fromJson(obj[0], listType);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                i1.putExtra("catalogo", cat[0]);
+                i1.putExtra("username", username);
+
+                ctx.startActivity(i1);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(ctx, "ERROR: Tentativo di connessione al server fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

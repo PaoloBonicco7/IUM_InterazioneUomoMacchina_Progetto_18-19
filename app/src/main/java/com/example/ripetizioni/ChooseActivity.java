@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.loopj.android.http.RequestParams;
 
 public class ChooseActivity extends AppCompatActivity {
 
@@ -15,6 +16,8 @@ public class ChooseActivity extends AppCompatActivity {
     TextView textView;
     Button prenota, visualizza;
     final Context ctx = ChooseActivity.this;
+    private static Model model = new Model();
+    private RequestParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +47,11 @@ public class ChooseActivity extends AppCompatActivity {
         visualizza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                ** FARE METODO NEL MODEL CHE VA A RICHIEDERE LISTA PRENOTAZIONI UTENTE E INIZIARE NUOVA ACTIVITY
-                Intent i1 = new Intent(ctx, UserActivity.class);
-                i1.putExtra("username", username);
+                params = new RequestParams();
+                params.put("azione", "VisualizzaPrenotazioni");
+                params.put("username", username);
 
-                ctx.startActivity(i1);
-                */
-                Toast.makeText(ChooseActivity.this, "Con la prossima patch vedrai la tua lista prenotazioni", Toast.LENGTH_SHORT).show();
+                model.getPrenotazioni(ctx, VisualizzaRipetizioni.class, username, params);
             }
         });
     }

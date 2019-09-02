@@ -56,4 +56,6 @@
     <string name="prenota_una_ripetizione">Prenota una ripetizione</string>
     <string name="torna_alla_home">Torna alla home</string>
     <string name="stato_prenotazione">Stato prenotazione</string>
+    <string name="le_tue_prenotazioni">Le tue prenotazioni</string>
+    <string name="seleziona_la_ripetizione_che_vuoi_cancellare">Seleziona la ripetizione che vuoi cancellare</string>
 </resources>
