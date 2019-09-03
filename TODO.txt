@@ -1,0 +1,4 @@
+1* problema login
+2* visualizzare le ripetizioni cancellate
+3* visualizzare le ripetizioni scadute
+4*

@@ -35,6 +35,7 @@ public class UserActivity extends AppCompatActivity {
 
         params = new RequestParams();
         params.put("azione", "Richiesta_slot");
+        params.put("catalogo", -1);
         params.put("username", username);
 
         lun.setOnClickListener(new View.OnClickListener() {

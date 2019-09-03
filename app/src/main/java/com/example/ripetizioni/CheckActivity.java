@@ -23,17 +23,17 @@ public class CheckActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
         tv = findViewById(R.id.textView);
-        b = findViewById(R.id.button);
+        b = findViewById(R.id.btn1);
 
         extras = getIntent().getExtras();
         ok = (Boolean) extras.get("check");
         username = (String) extras.get("username");
 
         if(ok){
-            tv.setText(username + ", LA PRENOTAZIONE EFFETTUATA CON SUCCESSO");
+            tv.setText(username + ", L'OPERAZIONE è ANDATA A BUON FINE.");
             Toast.makeText(CheckActivity.this, "LA PRENOTAZIONE è ANDATA A BUON FINE", Toast.LENGTH_SHORT).show();
         } else {
-            tv.setText(username + ", ERRORE DURANTE LA PRENOTAZIONE");
+            tv.setText("ERRORE!! \n Operazione non riuscita.");
             Toast.makeText(CheckActivity.this, "ERRORE DURANTE LA REGISTRAZIONE DELLA RIPETIZIONE", Toast.LENGTH_SHORT).show();
         }
 

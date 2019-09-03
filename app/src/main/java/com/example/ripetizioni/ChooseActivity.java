@@ -28,7 +28,6 @@ public class ChooseActivity extends AppCompatActivity {
         username = (String) extras.get("username");
 
         nome = "Ciao benvenuto " + username;
-
         textView.setText(nome);
 
         prenota = findViewById(R.id.prenota);

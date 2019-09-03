@@ -55,10 +55,6 @@ public class TimesActivity extends AppCompatActivity {
                     textView = findViewById(R.id.textView5);
                     String catalogo = "CATALOGO PROF: \n";
 
-                    if (catDoc.isEmpty()) {
-                        System.out.println("CAT DOC VUOTO AAAAA");
-                    }
-
                     for (MostraCatalogo list : catDoc) {
                         catalogo = catalogo + "\n" + list.toString();
                     }
@@ -75,7 +71,6 @@ public class TimesActivity extends AppCompatActivity {
                     textView.setText("Hai selezionato il blocco orario: " + s);
 
                     for (MostraCatalogo list : catDoc) {
-                        System.out.println(list.toString());
                         if (oraInizio == list.getOraInizio()) {
                             prenotazione = list;
                         }
@@ -105,20 +100,22 @@ public class TimesActivity extends AppCompatActivity {
         conferma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                params = new RequestParams();
-                extras = getIntent().getExtras();
+                if (textView.getText() != "L'orario selezionato non è più disponibile") {
+                    params = new RequestParams();
+                    extras = getIntent().getExtras();
 
-                if(extras != null) {
-                    username = (String) extras.get("username");
+                    if (extras != null) {
+                        username = (String) extras.get("username");
+                    }
+
+                    params.put("username", username);
+                    params.put("catalogo", prenotazione.getIdCatalogo());
+                    params.put("azione", "Prenota");
+
+                    model.prenota(TimesActivity.this, CheckActivity.class, username, params);
+                } else {
+                    Toast.makeText(TimesActivity.this, "LA RIPETIZIONE NON è DISPONIBILE, IMPOSSIBILE PRENOTARE", Toast.LENGTH_SHORT).show();
                 }
-
-                System.out.println("USERNAME\n" + username);
-
-                params.put("username", username);
-                params.put("catalogo", prenotazione.getIdCatalogo());
-                params.put("azione", "Prenota");
-
-                model.prenota(TimesActivity.this, CheckActivity.class, username, params);
             }
         });
     }

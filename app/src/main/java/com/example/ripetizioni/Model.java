@@ -128,10 +128,9 @@ class Model {
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                System.out.println("OnFalliure ERRORE NELLA PRENOTAIZONE DI UNA RIPETIZIONE");
+                System.out.println("OnFalliure: ERRORE NELLA CANCELLAZIONE DI UNA RIPETIZIONE");
             }
         });
-
     }
 
     public void getPrenotazioni(final Context ctx, final Class classe, String u, RequestParams params) {
@@ -161,6 +160,39 @@ class Model {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Toast.makeText(ctx, "ERROR: Tentativo di connessione al server fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void cancella(final Context ctx, final Class classe, String username, RequestParams params) {
+        final Boolean[] check = new Boolean[1];
+        check[0] = false;
+        final String u = username;
+        client.get(MYURL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    check[0] = Boolean.valueOf(response.getString("result"));
+                    System.out.println("RESPONSE:\n" + check[0]);
+                    if(check[0]){
+                        System.out.println("CANCELLAZIONE EFFETTUATA CON SUCCESSO");
+                    } else {
+                        System.out.println("ERRORE DURANTE LA CANCELLAZIONE");
+                    }
+
+                    Intent i1 = new Intent(ctx, classe);
+
+                    i1.putExtra("check", check[0]);
+                    i1.putExtra("username", u);
+                    ctx.startActivity(i1);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println("OnFalliure ERRORE NELLA PRENOTAIZONE DI UNA RIPETIZIONE");
             }
         });
     }

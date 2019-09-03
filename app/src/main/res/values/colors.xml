@@ -5,8 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="LoginBackground">#3B7CA2</color>
 
-    <color name="colorBackgroundAct1">#105f83</color>
-    <color name="colorButton1">#8bacbc</color>
+    <color name="colorBackgroundAct1">#105F83</color>
+    <color name="colorButton1">#8BACBC</color>
     <color name="colorBackgroundLogin">#317D12</color>
 
 </resources>

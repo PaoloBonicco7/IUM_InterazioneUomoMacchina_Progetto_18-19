@@ -58,4 +58,7 @@
     <string name="stato_prenotazione">Stato prenotazione</string>
     <string name="le_tue_prenotazioni">Le tue prenotazioni</string>
     <string name="seleziona_la_ripetizione_che_vuoi_cancellare">Seleziona la ripetizione che vuoi cancellare</string>
+    <string name="lista_ripetizioni">Lista ripetizioni</string>
+    <string name="cancella">CANCELLA</string>
+    <string name="lista_cancellazioni">Lista cancellazioni</string>
 </resources>

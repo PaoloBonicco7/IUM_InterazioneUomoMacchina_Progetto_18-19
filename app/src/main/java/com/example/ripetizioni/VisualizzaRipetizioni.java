@@ -2,9 +2,13 @@ package com.example.ripetizioni;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
 
@@ -12,23 +16,31 @@ import java.util.ArrayList;
 
 public class VisualizzaRipetizioni extends AppCompatActivity {
 
-    String username;
-    private RequestParams params;
+    String username, p1, p2, txt = "";
     ArrayList<MostraEffettuate> cat = new ArrayList<>();
-    TextView tv;
-    String txt = "";
+    MostraEffettuate prenotazione;
+    TextView tv2, tv6, tv3;
+    int check = 0;
+    String[] parts;
+    Button btn1;
+    Bundle extras;
+    private static Model model = new Model();
+    RequestParams params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visualizza_ripetizioni);
-        tv = findViewById(R.id.textView2);
+        tv2 = findViewById(R.id.textView2);
+        tv3 = findViewById(R.id.textView3);
         Spinner spinner = (Spinner)findViewById(R.id.spinner2);
+        btn1 = findViewById(R.id.btn1);
+
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
-        Bundle extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
 
         if(extras != null) {
             username = extras.getString("username");
@@ -36,7 +48,7 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
         }
 
         for (MostraEffettuate elem : cat) {
-            txt = elem.getTitolo() + ": " + elem.getCognome() + " " + elem.getNome()
+            txt = elem.getIdCatalogo() + ": " + elem.getTitolo() + " - " + elem.getCognome() + " " + elem.getNome()
                     + " ore " + String.valueOf(elem.getOraInizio());
             spinnerAdapter.add(txt);
         }
@@ -49,82 +61,45 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
                     + " alle ore " + String.valueOf(eff.getOraInizio()) + "\n";
         }
 
-        tv.setText(txt);
+        tv2.setText(txt);
+        tv3.setText(txt);
 
-        /*
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected (AdapterView < ? > parent, View view, int position, long id){
-                int check = 0;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(++check >1) {
-                    textView = findViewById(R.id.textView5);
-                    String catalogo = "CATALOGO PROF: \n";
-
-                    if (catDoc.isEmpty()) {
-                        System.out.println("CAT DOC VUOTO AAAAA");
-                    }
-
-                    for (MostraCatalogo list : catDoc) {
-                        catalogo = catalogo + "\n" + list.toString();
-                    }
-
-                    textView.setText(catalogo);
+                    tv6 = findViewById(R.id.textView6);
+                    String ripetizione = "";
 
                     //Extract value from spinner
                     String s = (String) parent.getItemAtPosition(position);
-                    parts = s.split("-");
+                    parts = s.split(":");
 
-                    oraInizio = Integer.parseInt(parts[0]);
-                    oraFine = Integer.parseInt(parts[1]);
+                    p1 = parts[0];
+                    p2 = parts[1];
 
-                    textView.setText("Hai selezionato il blocco orario: " + s);
+                    tv6.setText(parts[1]);
 
-                    for (MostraCatalogo list : catDoc) {
-                        System.out.println(list.toString());
-                        if (oraInizio == list.getOraInizio()) {
-                            prenotazione = list;
-                        }
-                    }
-
-                    if(prenotazione != null) {
-                        visualizzaPrenotaz = "Lezione di " + subject + " tenuta dal Prof. " + prenotazione.getCognome() +
-                                " " + prenotazione.getNome() + " dalle ore " + prenotazione.getOraInizio() + " alle " + prenotazione.getOraFine();
-                    } else {
-                        visualizzaPrenotaz = "L'orario selezionato non è più disponibile";
-                    }
-                    textView.setText(visualizzaPrenotaz);
-                    conferma.setVisibility(View.VISIBLE);
+                    btn1.setVisibility(View.VISIBLE);
                 }
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
-                Toast.makeText(VisualizzaRipetizioni.this, "DEVI SELEZIONARE UN ORARIO", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VisualizzaRipetizioni.this, "Seleziona una ripetizione da cancellare", Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.orari, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        conferma.setOnClickListener(new View.OnClickListener() {
+        btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 params = new RequestParams();
-                extras = getIntent().getExtras();
-
-                if(extras != null) {
-                    username = (String) extras.get("username");
-                }
-
-                System.out.println("USERNAME\n" + username);
 
                 params.put("username", username);
-                params.put("catalogo", prenotazione.getIdCatalogo());
-                params.put("azione", "Prenota");
+                params.put("catalogo", p1);
+                params.put("azione", "Cancella");
 
-                model.prenota(TimesActivity.this, CheckActivity.class, username, params);
+                model.cancella(VisualizzaRipetizioni.this, CheckActivity.class, username, params);
             }
         });
-        */
     }
 }
