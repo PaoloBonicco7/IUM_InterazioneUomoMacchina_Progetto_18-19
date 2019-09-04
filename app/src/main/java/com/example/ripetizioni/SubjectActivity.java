@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,20 +42,8 @@ public class SubjectActivity extends AppCompatActivity {
                     teacher.add(doc);
                 }
             }
-            if(teacher != null) {
-                compose(teacher);
-            } else {
-                Toast.makeText(ctx, "ERRORE, NON PUOI PRNOTARE RIPETIZIONI PER I GIORNI PASSATI",
-                        Toast.LENGTH_SHORT).show();
-                Intent i1 = new Intent(ctx, ChooseActivity.class);
+            compose(teacher);
 
-                i1.putExtra("username", username);
-                ctx.startActivity(i1);
-            }
-
-        } else {
-            Toast.makeText(ctx, "Non ci sono ripetizioni disponibili di " + subject +
-                    " per il giorno selezionato", Toast.LENGTH_SHORT).show();
         }
 
         doc1.setOnClickListener(new View.OnClickListener(){

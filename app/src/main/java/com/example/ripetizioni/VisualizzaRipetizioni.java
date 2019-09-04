@@ -52,9 +52,11 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
         spinnerAdapter.notifyDataSetChanged();
 
         for (MostraEffettuate elem : cat) {
-            txt = elem.getIdCatalogo() + ": " + elem.getTitolo() + " - " + elem.getCognome() + " " + elem.getNome()
-                    + " ore " + String.valueOf(elem.getOraInizio());
-            spinnerAdapter.add(txt);
+            if(elem.getStato().equals("attiva")) {
+                txt = elem.getIdCatalogo() + ": " + elem.getTitolo() + " - " + elem.getCognome() + " " + elem.getNome()
+                        + " ore " + String.valueOf(elem.getOraInizio());
+                spinnerAdapter.add(txt);
+            }
         }
 
         spinnerAdapter.notifyDataSetChanged();
@@ -62,17 +64,19 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
         txt = "";
         txt2 = "";
         for (MostraEffettuate eff : cat) {
-            if(eff.getStato() == "attiva") {
+            if(eff.getStato().equals("attiva")) {
                 txt = txt + " - " + eff.getTitolo() + ": " + eff.getCognome() + " " + eff.getNome()
                         + " alle ore " + String.valueOf(eff.getOraInizio()) + ", stato: " + eff.getStato() + "\n";
-            } else {
+            } else if (eff.getStato().equals("scaduta")){
                 txt2 = txt2 + " - " + eff.getTitolo() + ": " + eff.getCognome() + " " + eff.getNome()
                         + " alle ore " + String.valueOf(eff.getOraInizio()) + ", stato: " + eff.getStato() + "\n";
+            } else {
+                System.out.println("ERRORE: Stato inesistente\n" + eff.getStato() + "\n");
             }
         }
 
-        tv2.setText(txt2);
-        tv3.setText(txt);
+        tv2.setText(txt);
+        tv3.setText(txt2);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

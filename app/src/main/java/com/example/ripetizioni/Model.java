@@ -68,7 +68,7 @@ class Model {
     }
 
     void dayInfo(final Context ctx, final Class classe, String u, RequestParams params) {
-        final String username = new String(u);
+        final String username = u;
         final String[] obj = new String[1];
         final ArrayList<MostraCatalogo>[] cat = new ArrayList[]{new ArrayList<>()};
 
@@ -77,6 +77,7 @@ class Model {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Intent i1 = new Intent(ctx, classe);
+                Intent i2 = new Intent(ctx, UserActivity.class);
 
                 try {
                     obj[0] = response.getString("CATALOGO_Android");
@@ -85,10 +86,17 @@ class Model {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                i1.putExtra("catalogo", cat[0]);
-                i1.putExtra("username", username);
+                if(cat[0].size() > 0) {
+                    i1.putExtra("catalogo", cat[0]);
+                    i1.putExtra("username", username);
 
-                ctx.startActivity(i1);
+                    ctx.startActivity(i1);
+                } else {
+                    i2.putExtra("check", true);
+                    i2.putExtra("username", username);
+
+                    ctx.startActivity(i2);
+                }
             }
 
             @Override

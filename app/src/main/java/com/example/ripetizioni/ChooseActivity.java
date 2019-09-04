@@ -37,6 +37,7 @@ public class ChooseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i1 = new Intent(ctx, UserActivity.class);
+                i1.putExtra("check", false); //Per controllo su prenotazioni scadute
                 i1.putExtra("username", username);
 
                 ctx.startActivity(i1);
