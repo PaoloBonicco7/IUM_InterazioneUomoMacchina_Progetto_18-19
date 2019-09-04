@@ -63,27 +63,33 @@ public class TimesActivity extends AppCompatActivity {
 
                     //Extract value from spinner
                     String s = (String) parent.getItemAtPosition(position);
-                    parts = s.split("-");
+                    if(!s.equals("XX-XX")) {
+                        parts = s.split("-");
 
-                    oraInizio = Integer.parseInt(parts[0]);
-                    oraFine = Integer.parseInt(parts[1]);
+                        oraInizio = Integer.parseInt(parts[0]);
+                        oraFine = Integer.parseInt(parts[1]);
 
-                    textView.setText("Hai selezionato il blocco orario: " + s);
+                        textView.setText("Hai selezionato il blocco orario: " + s);
 
-                    for (MostraCatalogo list : catDoc) {
-                        if (oraInizio == list.getOraInizio()) {
-                            prenotazione = list;
+                        for (MostraCatalogo list : catDoc) {
+                            if (oraInizio == list.getOraInizio()) {
+                                prenotazione = list;
+                            }
                         }
-                    }
 
-                    if(prenotazione != null) {
-                        visualizzaPrenotaz = "Lezione di " + subject + " tenuta dal Prof. " + prenotazione.getCognome() +
-                                " " + prenotazione.getNome() + " dalle ore " + prenotazione.getOraInizio() + " alle " + prenotazione.getOraFine();
+                        if (prenotazione != null) {
+                            visualizzaPrenotaz = "Lezione di " + subject + " tenuta dal Prof. " + prenotazione.getCognome() +
+                                    " " + prenotazione.getNome() + " dalle ore " + prenotazione.getOraInizio() + " alle " + prenotazione.getOraFine();
+                        } else {
+                            visualizzaPrenotaz = "L'orario selezionato non è più disponibile";
+                        }
+                        textView.setText(visualizzaPrenotaz);
+                        conferma.setVisibility(View.VISIBLE);
                     } else {
-                        visualizzaPrenotaz = "L'orario selezionato non è più disponibile";
+                        conferma.setVisibility(View.INVISIBLE);
+                        Toast.makeText(TimesActivity.this, "DEVI SELEZIONARE UN ORARIO", Toast.LENGTH_SHORT).show();
+                        textView.setText("Seleziona un orario");
                     }
-                    textView.setText(visualizzaPrenotaz);
-                    conferma.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -1,12 +1,10 @@
 package com.example.ripetizioni;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.RequestParams;
@@ -31,8 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         Button accedi = findViewById(R.id.accedi_btn);
 
-        TextView registrare = findViewById(R.id.registare_btn);
-
         //Listener accedi_btn
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +45,5 @@ public class LoginActivity extends AppCompatActivity {
                 model.checkLogin(LoginActivity.this, ChooseActivity.class, u, p, params);
             }
         });
-
-        //Funzione di registrazione non richiesta, lascia loggare in automatico
-        registrare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, ChooseActivity.class);
-                startActivity(i);
-            }
-        });
-
     }
 }

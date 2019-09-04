@@ -18,6 +18,7 @@
     <string name="chimica_request_message" translatable="false">Hai prenotato Chimica!</string>
 
     <string-array name="orari">
+        <item>XX-XX</item>
         <item>15-16</item>
         <item>16-17</item>
         <item>17-18</item>
@@ -56,9 +57,23 @@
     <string name="prenota_una_ripetizione">Prenota una ripetizione</string>
     <string name="torna_alla_home">Torna alla home</string>
     <string name="stato_prenotazione">Stato prenotazione</string>
-    <string name="le_tue_prenotazioni">Le tue prenotazioni</string>
+    <string name="le_tue_prenotazioni">Le tue prenotazioni attive</string>
     <string name="seleziona_la_ripetizione_che_vuoi_cancellare">Seleziona la ripetizione che vuoi cancellare</string>
     <string name="lista_ripetizioni">Lista ripetizioni</string>
     <string name="cancella">CANCELLA</string>
+    <string name="lista_scadute">Lista prenotazioni scadute</string>
+    <string name="le_tue_prenotazioni_scadute">Le tue prenotazioni scadute</string>
     <string name="lista_cancellazioni">Lista cancellazioni</string>
+    <string name="ripetizioni_che_hai_cancellato">Ripetizioni che hai cancellato</string>
+    <string name="username">username</string>
+    <string name="accedi">Accedi</string>
+    <string name="login">LOGIN</string>
+    <string name="password">password</string>
+    <string name="luned">LUNEDÍ</string>
+    <string name="marted">MARTEDÍ</string>
+    <string name="mercoled">MERCOLEDÍ</string>
+    <string name="gioved">GIOVEDÍ</string>
+    <string name="venerd">VENERDÍ</string>
+    <string name="docente_1">Docente 1</string>
+    <string name="docente_2">Docente 2</string>
 </resources>

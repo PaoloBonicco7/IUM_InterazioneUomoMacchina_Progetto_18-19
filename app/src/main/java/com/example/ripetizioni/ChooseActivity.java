@@ -27,7 +27,7 @@ public class ChooseActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         username = (String) extras.get("username");
 
-        nome = "Ciao benvenuto " + username;
+        nome = "Benvenuto " + username + ", seleziona un azione da eseguire.";
         textView.setText(nome);
 
         prenota = findViewById(R.id.prenota);

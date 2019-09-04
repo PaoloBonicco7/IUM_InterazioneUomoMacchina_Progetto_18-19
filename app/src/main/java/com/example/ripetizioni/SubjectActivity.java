@@ -35,8 +35,6 @@ public class SubjectActivity extends AppCompatActivity {
         username = (String) extras.get("username");
         subject = (String) extras.get("subject");
 
-        //System.out.println("SUBJECT ACTIVITY USERNAME\n" + username);
-
         if (cat != null) {
             for (MostraCatalogo list: cat) {
                 catalogo = catalogo + "\n" + list;
@@ -45,7 +43,16 @@ public class SubjectActivity extends AppCompatActivity {
                     teacher.add(doc);
                 }
             }
-            compose(teacher);
+            if(teacher != null) {
+                compose(teacher);
+            } else {
+                Toast.makeText(ctx, "ERRORE, NON PUOI PRNOTARE RIPETIZIONI PER I GIORNI PASSATI",
+                        Toast.LENGTH_SHORT).show();
+                Intent i1 = new Intent(ctx, ChooseActivity.class);
+
+                i1.putExtra("username", username);
+                ctx.startActivity(i1);
+            }
 
         } else {
             Toast.makeText(ctx, "Non ci sono ripetizioni disponibili di " + subject +

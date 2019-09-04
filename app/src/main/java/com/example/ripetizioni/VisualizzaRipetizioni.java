@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 public class VisualizzaRipetizioni extends AppCompatActivity {
 
-    String username, p1, p2, txt = "";
+    String username, p1, p2, txt, txt2 = "";
     ArrayList<MostraEffettuate> cat = new ArrayList<>();
     MostraEffettuate prenotazione;
     TextView tv2, tv6, tv3;
     int check = 0;
     String[] parts;
-    Button btn1;
+    Button btn1, btn2;
     Bundle extras;
     private static Model model = new Model();
     RequestParams params;
@@ -35,6 +35,7 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
         tv3 = findViewById(R.id.textView3);
         Spinner spinner = (Spinner)findViewById(R.id.spinner2);
         btn1 = findViewById(R.id.btn1);
+        btn2 = findViewById(R.id.btn2);
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -47,6 +48,9 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
             cat = (ArrayList<MostraEffettuate>) extras.get("catalogo");
         }
 
+        spinnerAdapter.add("Seleziona Corso");
+        spinnerAdapter.notifyDataSetChanged();
+
         for (MostraEffettuate elem : cat) {
             txt = elem.getIdCatalogo() + ": " + elem.getTitolo() + " - " + elem.getCognome() + " " + elem.getNome()
                     + " ore " + String.valueOf(elem.getOraInizio());
@@ -56,12 +60,18 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
         spinnerAdapter.notifyDataSetChanged();
 
         txt = "";
+        txt2 = "";
         for (MostraEffettuate eff : cat) {
-            txt = txt + eff.getTitolo() + ": " + eff.getCognome() + " " + eff.getNome()
-                    + " alle ore " + String.valueOf(eff.getOraInizio()) + "\n";
+            if(eff.getStato() == "attiva") {
+                txt = txt + " - " + eff.getTitolo() + ": " + eff.getCognome() + " " + eff.getNome()
+                        + " alle ore " + String.valueOf(eff.getOraInizio()) + ", stato: " + eff.getStato() + "\n";
+            } else {
+                txt2 = txt2 + " - " + eff.getTitolo() + ": " + eff.getCognome() + " " + eff.getNome()
+                        + " alle ore " + String.valueOf(eff.getOraInizio()) + ", stato: " + eff.getStato() + "\n";
+            }
         }
 
-        tv2.setText(txt);
+        tv2.setText(txt2);
         tv3.setText(txt);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,14 +83,20 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
 
                     //Extract value from spinner
                     String s = (String) parent.getItemAtPosition(position);
-                    parts = s.split(":");
+                    if(s != "Seleziona Corso") {
+                        parts = s.split(":");
 
-                    p1 = parts[0];
-                    p2 = parts[1];
+                        p1 = parts[0];
+                        p2 = parts[1];
 
-                    tv6.setText(parts[1]);
+                        tv6.setText(parts[1]);
 
-                    btn1.setVisibility(View.VISIBLE);
+                        btn1.setVisibility(View.VISIBLE);
+                    } else {
+                        btn1.setVisibility(View.INVISIBLE);
+                        Toast.makeText(VisualizzaRipetizioni.this, "Selezionare una ripetizione", Toast.LENGTH_SHORT).show();
+                        tv6.setText("SELEZIONA UNA PRENOTAZIONE PER CANCELLARLA");
+                    }
                 }
             }
 
@@ -101,5 +117,18 @@ public class VisualizzaRipetizioni extends AppCompatActivity {
                 model.cancella(VisualizzaRipetizioni.this, CheckActivity.class, username, params);
             }
         });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params = new RequestParams();
+
+                params.put("username", username);
+                params.put("azione", "VisualizzaCancellate");
+
+                model.getCancellate(VisualizzaRipetizioni.this, DeleteActivity.class, username, params);
+            }
+        });
+
     }
 }
