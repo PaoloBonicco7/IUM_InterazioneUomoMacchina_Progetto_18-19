@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeleteActivity"></activity>
+        <activity android:name=".DayActivity2"></activity>
+        <activity android:name=".NoAutenticatedUser" />
+        <activity android:name=".DeleteActivity" />
         <activity android:name=".VisualizzaRipetizioni" />
         <activity android:name=".CheckActivity" />
         <activity android:name=".ChooseActivity" />

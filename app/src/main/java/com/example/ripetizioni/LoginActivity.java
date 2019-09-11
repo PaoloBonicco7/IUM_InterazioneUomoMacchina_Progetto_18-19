@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         Button accedi = findViewById(R.id.accedi_btn);
+        Button salta = findViewById(R.id.salta_btn);
 
         //Listener accedi_btn
         accedi.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Attempt to Login of user " + u, Toast.LENGTH_SHORT).show();
 
                 model.checkLogin(LoginActivity.this, ChooseActivity.class, u, p, params);
+            }
+        });
+
+        salta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                params = new RequestParams();
+                params.put("azione", "noLogin");
+
+                model.noLogin(LoginActivity.this, NoAutenticatedUser.class, params);
             }
         });
     }

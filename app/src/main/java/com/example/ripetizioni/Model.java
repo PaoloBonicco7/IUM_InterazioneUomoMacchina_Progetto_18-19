@@ -67,6 +67,35 @@ class Model {
         });
     }
 
+    void noLogin(final Context ctx, final Class classe, RequestParams params) {
+        final String[] obj = new String[1];
+        final ArrayList<MostraCatalogo>[] cat = new ArrayList[]{new ArrayList<>()};
+
+        client.get(MYURL, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Intent i1 = new Intent(ctx, classe);
+
+                try {
+                    obj[0] = response.getString("CATALOGO");
+                    Type listType = new TypeToken<ArrayList<Catalogo>>(){}.getType();
+                    cat[0] = new Gson().fromJson(obj[0], listType);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                i1.putExtra("catalogo", cat[0]);
+
+                ctx.startActivity(i1);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(ctx, "ERROR: Tentativo di connessione al server fallita", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     void dayInfo(final Context ctx, final Class classe, String u, RequestParams params) {
         final String username = u;
         final String[] obj = new String[1];

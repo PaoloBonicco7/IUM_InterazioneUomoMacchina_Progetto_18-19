@@ -76,4 +76,9 @@
     <string name="venerd">VENERDÍ</string>
     <string name="docente_1">Docente 1</string>
     <string name="docente_2">Docente 2</string>
+    <string name="continua_senza_login">Continua senza login</string>
+    <string name="catalogo">Catalogo</string>
+    <string name="lista_ripetizioni_disponibili">Lista ripetizioni disponibili</string>
+    <string name="accedi_al_nostro_portale">Accedi al nostro portale</string>
+    <string name="seleziona_il_docente">Seleziona il docente</string>
 </resources>

@@ -18,6 +18,7 @@ public class UserActivity extends AppCompatActivity {
     Boolean check;
 
     final Context ctx = UserActivity.this;
+    Class c = DayActivity2.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,41 @@ public class UserActivity extends AppCompatActivity {
         params.put("catalogo", -1);
         params.put("username", username);
 
+        lun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { params.put("day", "lunedì");
+                model.dayInfo(ctx, c, username, params);
+            }
+        });
+
+        mar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { params.put("day", "martedì");
+                model.dayInfo(ctx, c, username, params);
+            }
+        });
+
+        mer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { params.put("day", "mercoledì");
+                model.dayInfo(ctx, c, username, params);
+            }
+        });
+
+        gio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { params.put("day", "giovedì");
+                model.dayInfo(ctx, c, username, params);
+            }
+        });
+
+        ven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { params.put("day", "venerdì");
+                model.dayInfo(ctx, c, username, params);
+            }
+        });
+        /*
         lun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { params.put("day", "lunedì");
@@ -82,5 +118,6 @@ public class UserActivity extends AppCompatActivity {
                 model.dayInfo(ctx, DayActivity.class, username, params);
             }
         });
+        */
     }
 }
