@@ -79,7 +79,7 @@ class Model {
 
                 try {
                     obj[0] = response.getString("CATALOGO");
-                    Type listType = new TypeToken<ArrayList<Catalogo>>(){}.getType();
+                    Type listType = new TypeToken<ArrayList<MostraCatalogo>>(){}.getType();
                     cat[0] = new Gson().fromJson(obj[0], listType);
                 } catch (JSONException e) {
                     e.printStackTrace();

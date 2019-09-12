@@ -24,21 +24,13 @@ public class NoAutenticatedUser extends AppCompatActivity {
 
         extras = getIntent().getExtras();
 
-        ArrayList<Catalogo> cat = new ArrayList<>();
-        cat = (ArrayList<Catalogo>)extras.get("catalogo");
-        String catalogo = "";
+        ArrayList<MostraCatalogo> cat = new ArrayList<>();
+        cat = (ArrayList<MostraCatalogo>)extras.get("catalogo");
+        String catalogo = "\n";
 
-        /*
-        *         this.idCatalogo = idCatalogo;
-        this.idDocente = idDocente;
-        this.idCorso = idCorso;
-        this.giorno = giorno;
-        this.oraInizio = oraInizio;
-        this.oraFine = oraFine;
-        this.stato = stato;*/
-
-        for (Catalogo eff : cat) {
-            catalogo = catalogo + eff.toString() + "\n";
+        for (MostraCatalogo eff : cat) {
+            catalogo = catalogo + "_" + eff.getGiorno() + ":  " + eff.getTitolo() + ", " + eff.getCognome() + " " +
+                    eff.getNome() + ", ore " + eff.getOraInizio() + ", stato: " + eff.getStato() + "\n\n";
         }
 
         tw.setText(catalogo);
